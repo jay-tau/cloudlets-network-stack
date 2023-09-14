@@ -171,14 +171,14 @@ void AodvExample::CreateNodes() {
   mobility.Install(nodes);
 
   // Print initial coordinates of all nodes
-  std::cout << "Initial positions: ";
-  for (uint32_t i = 0; i < size; i++) {
-    Ptr<Node> p = nodes.Get(i);
-    Ptr<MobilityModel> mob = p->GetObject<MobilityModel>();
-    std::cout << "(" << mob->GetPosition().x << ", " << mob->GetPosition().y
-              << ")" << std::endl;
-  }
-  std::cout << std::endl;
+  // std::cout << "Initial positions: ";
+  // for (uint32_t i = 0; i < size; i++) {
+  //   Ptr<Node> p = nodes.Get(i);
+  //   Ptr<MobilityModel> mob = p->GetObject<MobilityModel>();
+  //   std::cout << "(" << mob->GetPosition().x << ", " << mob->GetPosition().y
+  //             << ")" << std::endl;
+  // }
+  // std::cout << std::endl;
 }
 
 void AodvExample::CreateDevices() {
@@ -216,19 +216,32 @@ void AodvExample::InstallInternetStack() {
 }
 
 void AodvExample::InstallApplications() {
-  PingHelper ping(
-      interfaces.GetAddress(size - 1));  // Setting destination address
-  ping.SetAttribute("VerboseMode", EnumValue(Ping::VerboseMode::VERBOSE));
+  // Random: source, destination(s), intervals, stop_times
+  srand(time(0));
+  int PERCENTAGE = 30;
+  int num_pairs = (PERCENTAGE * size) / 100;
+  for (int _ = 0; _ < num_pairs; _++) {
+    auto source = rand() % size;
+    auto dest = rand() % size;
+    auto start_time = rand() % ((int)totalTime);
+    auto end_time = start_time + rand() % ((int)totalTime - start_time);
 
-  // for (random_i in size)
-  ApplicationContainer p = ping.Install(nodes.Get(0));
-  p.Start(Seconds(0));
-  p.Stop(Seconds(totalTime) - Seconds(0.001));
+    PingHelper ping(
+        interfaces.GetAddress(dest));  // Setting destination address
+    ping.SetAttribute("VerboseMode", EnumValue(Ping::VerboseMode::VERBOSE));
+    // ping.SetAttribute("Interval", TimeValue(Seconds(interval)));
+
+    // NodeContainer temp = NodeContainer(nodes.Get(source));
+
+    ApplicationContainer p = ping.Install(nodes.Get(source));
+    p.Start(Seconds(start_time));
+    p.Stop(Seconds(end_time) - Seconds(0.001));
+  }
 
   // // move node away
   // Ptr<Node> node = nodes.Get(size / 2);
   // Ptr<MobilityModel> mob = node->GetObject<MobilityModel>();
   // Simulator::Schedule(Seconds(totalTime / 3), &MobilityModel::SetPosition,
   // mob,
-  //                     Vector(1e5, 1e5, 1e5))
+  //                  w   Vector(1e5, 1e5, 1e5))
 }
