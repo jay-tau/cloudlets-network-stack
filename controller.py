@@ -11,7 +11,7 @@ except FileNotFoundError:
 
 for num_nodes in nodes:
     for pktsize in pktsizes:
-        os.system("./controller.sh 8 512")
+        os.system("./controller.sh 8")
         sys.exit(0)
     # with open("del_ratio.txt", "a") as f:
     #     f.write("\n")

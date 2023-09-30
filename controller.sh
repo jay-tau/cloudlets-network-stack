@@ -6,14 +6,14 @@
 NODES=$1
 XY=250
 MAXCONNS=$1
-PKTSIZE=$2
+# PKTSIZE=$2
 
 rm setdest-op
 # echo "UPDATED"
 setdest -v 1 -n $NODES -p 200 -M 10.0 -t 200 -x $XY -y $XY > setdest-op
 
 rm cbr-op
-ns cbrgen.tcl $PKTSIZE -type cbr -nn $NODES -seed 1.0 -mc $MAXCONNS -rate 4.0 > cbr-op
+ns cbrgen.tcl -type cbr -nn $NODES -seed 1.0 -mc $MAXCONNS -rate 4.0 > cbr-op
 
 rm wireless.tr
 ns simple-wireless.tcl $NODES $XY $XY
