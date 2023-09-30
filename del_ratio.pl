@@ -25,4 +25,10 @@ while($line)
 
 $opt = $count / $count1;
 $optp = $opt * 100;
-print "$optp\n";
+# print "$optp\n";
+
+open(FH, '>>', "del_ratio.txt") or die $!;
+
+print FH "$optp\n";
+
+close(FH);

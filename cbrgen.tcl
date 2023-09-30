@@ -43,13 +43,16 @@
 #
 # $Header: /cvsroot/nsnam/ns-2/indep-utils/cmu-scen-gen/cbrgen.tcl,v 1.4 2005/09/16 03:05:39 tomh Exp $
 
+# Take command line arugments
+set opt(pktsize)	[lindex $argv 0]
+
 # ======================================================================
 # Default Script Options
 # ======================================================================
 set opt(nn)		0		;# Number of Nodes
 set opt(seed)		0.0
 set opt(mc)		0
-set opt(pktsize)	512
+# set opt(pktsize)	512
 
 set opt(rate)		0
 set opt(interval)	0.0		;# inverse of rate
