@@ -27,8 +27,12 @@ $opt = $count / $count1;
 $optp = $opt * 100;
 # print "$optp\n";
 
-open(FH, '>>', "del_ratio.txt") or die $!;
+my $file_path = "del_ratio.txt";  # Replace with your file path
+open(my $file_handle, '>>', $file_path) or die "Could not open file '$file_path' for append: $!";
 
-print FH "$optp\n";
+my $data_to_append = "$optp\n";
+print $file_handle $data_to_append;
 
-close(FH);
+close $file_handle or die "Error closing file '$file_path': $!";
+
+

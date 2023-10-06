@@ -44,7 +44,7 @@
 # $Header: /cvsroot/nsnam/ns-2/indep-utils/cmu-scen-gen/cbrgen.tcl,v 1.4 2005/09/16 03:05:39 tomh Exp $
 
 # Take command line arugments
-# set opt(pktsize)	[lindex $argv 0]
+set opt(pktsize)	[lindex $argv 0]
 
 # ======================================================================
 # Default Script Options
@@ -52,7 +52,7 @@
 set opt(nn)		0		;# Number of Nodes
 set opt(seed)		0.0
 set opt(mc)		0
-set opt(pktsize)	512
+#set opt(pktsize)	512
 
 set opt(rate)		0
 set opt(interval)	0.0		;# inverse of rate
@@ -158,7 +158,7 @@ $u use-rng $rng
 set cbr_cnt 0
 set src_cnt 0
 
-for {set i 0} {$i < $opt(nn) } {incr i} {
+for {set i 0} {$i < $opt(nn)} {incr i} {
 
 	set x [$u value]
 
@@ -166,7 +166,7 @@ for {set i 0} {$i < $opt(nn) } {incr i} {
 
 	incr src_cnt
 
-	set dst [expr ($i+1) % [expr $opt(nn) + 1] ]
+	set dst [expr ($i+1) % [expr $opt(nn)] ]
 	#if { $dst == 0 } {
 	    #set dst [expr $dst + 1]
 	    #}
@@ -183,7 +183,7 @@ for {set i 0} {$i < $opt(nn) } {incr i} {
 
 	if {$x < 75} {continue;}
 
-	set dst [expr ($i+2) % [expr $opt(nn) + 1] ]
+	set dst [expr ($i+2) % [expr $opt(nn)] ]
 	#if { $dst == 0 } {
 		#set dst [expr $dst + 1]
 	#}

@@ -1,20 +1,16 @@
 import os
-import sys
 
-nodes = range(8, 25 + 1)
-pktsizes = (512, 1024, 2048, 4096)
+nodes = [x for x in range(8, 26)]
+# nodes = [24]
+pktsizes = [512, 1024, 2048, 4096, 8192, 16384]
 
-try:
-    os.remove("del_ratio.txt")
-except FileNotFoundError:
+# Create an empty "del_ratio.txt" file
+with open("del_ratio.txt", "w") as del_ratio_file:
     pass
 
-for num_nodes in nodes:
-    for pktsize in pktsizes:
-        os.system("./controller.sh 8")
-        sys.exit(0)
-    # with open("del_ratio.txt", "a") as f:
-    #     f.write("\n")
+for pktsize in pktsizes:
+    for num_nodes in nodes:
+        os.system(f"./controller.sh {num_nodes} {pktsize}")
 
 
 # pktsize in cbrgen.tcl from 512 to 4096
