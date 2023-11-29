@@ -13,7 +13,7 @@ rm cbr-op
 ns cbrgen.tcl $PKTSIZE -type cbr -nn $NODES -seed 1.0 -mc $MAXCONNS -rate 4.0 > cbr-op
 
 rm wireless.tr
-ns simple-wireless.tcl $NODES $XY $XY $IFQLENGTH
+ns finalruns.tcl $NODES $XY $XY $IFQLENGTH
 
 rm tmp
 perl column.pl 0 18 < wireless.tr > tmp

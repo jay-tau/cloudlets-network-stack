@@ -1,5 +1,5 @@
 # Check if the number of command-line arguments is correct
-if { $argc != 3 } {
+if { $argc != 4 } {
     puts "Usage: tcl_script.tcl nn x y"
     exit 1
 }
@@ -27,7 +27,7 @@ set val(rp)             DumbAgent                  ;# routing protocol
 set val(seed)		0.0
 set val(cp)		cbr-op           	   ;# Traffic file generated using cbrgen.tcl
 set val(sc)		setdest-op		   ;# Scenario file generated using setdest
-set val(stop)		100.0			   ;# Simulation Time
+set val(stop)		1000.0			   ;# Simulation Time
 
 # Rest of the script remains unchanged
 

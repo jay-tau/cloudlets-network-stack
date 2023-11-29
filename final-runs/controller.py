@@ -12,6 +12,3 @@ for pktsize in pktsizes:
     for num_nodes in nodes:
         for ifq_length in ifq:
             os.system(f"./controller.sh {num_nodes} {pktsize} {ifq_length}")
-
-
-# pktsize in cbrgen.tcl from 512 to 4096
